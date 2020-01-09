@@ -1,0 +1,316 @@
+{% extends "web_pages/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <title>Profile</title>
+    <style type="text/css">
+        #profile_photo{
+            height: 100px;
+            width: 100px;
+            margin: 10px;
+        }
+        #profile_info{
+
+        }
+        #update_form{
+            font-size: 10px;
+        }            
+      @media screen and (max-width: 800px){
+        #profile_photo{
+            height: 60px;
+            width: 60px;
+            margin: 5px;
+        } 
+        #profile_info{
+           font-size: 15px;
+        }
+        #update_form{
+            font-size: 12px;
+        }                   
+       } 
+    </style>
+</head>
+  <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Update Your Account</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+             <form method="POST" enctype="multipart/form-data"><br>       
+     <div class="embed-responsive order-md-4" align="center">   
+        {% csrf_token %}
+             <fieldset class="form-group" >
+                 <!-- Material form subscription -->
+                    <div class="card" align="center" style="background-color:lightblue; width: 500px; text-align: left; font-size: 19px;" >
+                      <br>
+                       <div class="media">
+                          <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" id="profile_photo">
+                          <div class="media-body">
+                            <h2 id="profile_info" class="account-heading">{{ user.username }}</h2>
+                            <p id="profile_info" class="text-secondary">{{ user.email }} <br>
+                                                    {{ user.first_name }}&nbsp;{{user.last_name}}</p>
+                        </div>
+                       </div>    
+                        <!--Card content-->
+                        <div class="card-body px-lg-5" style="width: 300px;" id="update_form">
+
+                            <!-- Form -->
+                            <form class="text-center" style="color: #757575;" action="#!">
+                          
+                                <p>{{form.errors}}</p>
+
+                                <!-- Name -->
+                                <div class="md-form mt-3">
+                                   Name &nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{u_form.username}} <br><br>
+                                </div>
+                                <div class="md-form mt-3">
+                                   Email &nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{u_form.email}} <br><br>
+                                </div>
+                                <div class="md-form mt-3">
+                                   First Name &nbsp;: &nbsp;{{u_form.first_name}} <br><br>
+                                </div>
+                                 <div class="md-form mt-3">
+                                   Last Name &nbsp;: &nbsp;{{u_form.last_name}} <br><br>
+                                </div>                                  
+                                 <div class="md-form mt-3">
+                                   Profile Photo&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{p_form.image}}<br> 
+                                    
+                                   <br><br>
+                                </div>                          
+
+                                <!-- Sign in button -->
+                             <div class="form-group">
+                                   <button class="btn btn-outline-info btn-rounded " type="submit">Update account</button>
+                           </div>
+ 
+                    </div>
+                    <!-- Material form subscription -->
+
+             </fieldset>  
+      </form>
+      </div>     
+  </div>  
+      </div>
+    </div>
+  </div>
+</div>
+<head>
+    <title>Profile</title>
+    <link href='https://fonts.googleapis.com/css?family=Pathway+Gothic+One' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+        body {
+        margin-top: 0px;   
+        background: url({% static 'user/backgroud_user_profile_background.jpg' %}) no-repeat;
+        background-size: 100%
+        
+}
+.left { float: left; }
+.right { float: right; }
+.clear { clear: both; }
+
+.container1 {
+    width: 320px;
+    background: #eeeeee;
+    overflow: hidden;
+    height: 435px;
+    margin: 50px auto;
+    position: relative;
+  -webkit-box-shadow: 0px 5px 10px -5px rgba(0, 0, 0, 0.5);
+-moz-box-shadow:    0px 5px 10px -5px rgba(0, 0, 0, 0.5);
+box-shadow:         0px 5px 10px -5px rgba(0, 0, 0, 0.5);
+}
+.navigation {
+    background: #3E4858;
+}
+.navigation ul li {
+    border-bottom: 1px solid #323846;
+    border-top: 1px solid #515e72;
+}
+.navigation ul li a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px;
+    overflow: hidden;
+    font: 17px 'Pathway Gothic One', sans-serif;
+}
+.cover {
+    background: url({% static 'user/Profile_background.jpg' %}) no-repeat center;
+    height: 180px;
+    width: 100%;
+    border-bottom: 5px solid #ffffff;
+    position: relative;
+    -webkit-box-shadow: 0px 5px 5px -5px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow:    0px 5px 5px -5px rgba(50, 50, 50, 0.3);
+    box-shadow:         0px 5px 5px -5px rgba(50, 50, 50, 0.3);
+}
+.cover .head .menu {
+    height: 22px;
+    width: 35px;
+    position: relative;
+    cursor: pointer;
+    opacity: 0.7;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+}
+.cover .head .menu.active,
+.cover .head .menu:hover {
+    opacity: 1;
+}
+.cover .avatar {
+    position: absolute;
+    background: #000;
+    border: 5px solid #ffffff;
+    cursor:pointer;
+    top: 125px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-shadow: 0px 5px 5px -5px rgba(50, 50, 50, 0.3);
+    -moz-box-shadow:    0px 5px 5px -5px rgba(50, 50, 50, 0.3);
+    box-shadow:         0px 5px 5px -5px rgba(50, 50, 50, 0.3);
+}
+.cover .avatar .light {
+    background: url('{% static 'user/background_user_profile.jpg' %}');
+    background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0)));
+    background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
+    top: -65px;
+    width: 100px;
+    height: 120px;
+    position: absolute;
+    left: 15px;
+    transform:rotate(-30deg);
+    -ms-transform:rotate(-30deg); /* IE 9 */
+    -webkit-transform:rotate(-30deg); /* Safari and Chrome */
+}
+
+.main {
+    padding: 60px 10px 10px;
+    text-align: center;
+}
+.main h1 {
+    font-weight: bold;
+    text-shadow: 0 -1px 0 #888888;
+    color: #cecece;
+    font-size: 30px;
+    margin-bottom: -3px;
+}
+.main h6 {
+    font: italic 16px "NotoSans";
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+.main p {
+    font: 14px/18px "Arial";
+}
+.social {
+    margin: 10px 0 20px;
+    text-align: center;
+}
+.social ul li {
+    display: inline;
+}
+.social ul li a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    transition: all .5s;
+    -moz-transition: all .5s; /* Firefox 4 */
+    -webkit-transition: all .5s; /* Safari and Chrome */
+    -o-transition: all .5s; /* Opera */
+}
+.social ul li a.linkedin {
+    background: #39C url("http://migkapa.com/site/lab/css3hover/images/linked-icon.png") no-repeat center;
+}
+.social ul li a.twitter {
+    background: #019AD2 url("http://migkapa.com/site/lab/css3hover/images/twitter-icon.png") no-repeat center;
+}
+.social ul li a.facebook {
+    background: #3B5998 url("http://migkapa.com/site/lab/css3hover/images/facebook-icon.png") no-repeat center;
+}
+.social ul li a.dribbble {
+    background: #EA4C89 url("http://migkapa.com/site/lab/css3hover/images/dribble-icon.png") no-repeat center;
+}
+.social ul li a:hover {
+    transform:rotate(360deg);
+    -ms-transform:rotate(360deg); /* IE 9 */
+    -moz-transform:rotate(360deg); /* Firefox */
+    -webkit-transform:rotate(360deg); /* Safari and Chrome */
+    -o-transform:rotate(360deg); /* Opera */
+}
+    </style>
+
+    <script type="text/javascript">
+        
+
+        $(document).ready(function(){
+            $('.menu').click(function(){
+                $(this).toggleClass('active');
+                $(this).parents('.container').find('.navigation').slideToggle('fast');
+            });
+            $('.actions').hover(
+                function(){
+                    $(this).find('.btn').removeClass('success').addClass('danger').text('Unfollow');
+                },
+                function(){
+                    $(this).find('.btn').removeClass('danger').addClass('success').text('Following');
+                }
+            );
+        });
+    </script>
+</head>
+<body>
+    <div class="Profile_background">
+            <div class="container1">
+                <div class="cover">
+                    <div class="head">
+                        <div class="menu left"></div>
+                        <div class="text-right">
+                          <a href="" class="btn btn-success btn-rounded mb-4" data-toggle="modal" data-target="#modalLoginForm">Upadate Account</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="avatar">
+                        <img src="{{user.profile.image.url}}" width="100" />
+                        <div class="light">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="main">
+                    <h1>{{user.first_name}} {{ user.last_name }}</h1>
+                    <h6><span>@</span>{{user.username}}</h6>
+                     <h6>{{user.email}}</h6>
+                    <p>NATIONAL SERVICE SCHEME helps student to cultivate a professional nature and it helps to provide awareness among people.</p>
+                </div>
+                <div class="social">
+                    <ul>
+                        <li><a class="linkedin" href="#"></a></li>
+                        <li><a class="twitter" href="#"></a></li>
+                        <li><a class="facebook" href="#"></a></li>
+                        <li><a class="dribbble" href="#"></a></li>
+                    </ul>
+                </div>
+        </div></div>
+</body></fieldset>
+{% endblock content %}

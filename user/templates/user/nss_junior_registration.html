@@ -1,0 +1,56 @@
+{% extends "web_pages/base.html"%}
+{% load static %}
+{% block content %}    
+        <form method="POST">       
+         <div align="center" class="embed-responsive order-md-4" align="center" style="background-image: url('backgroud_for_register_page') ">   
+            {% csrf_token %}
+             <fieldset class="form-group">
+                 <!-- Material form subscription -->
+                    <div class="card" align="center" style="background-color:lightblue; width: 500px; text-align: left; font-size: 19px;" >
+
+                        <h5 class="card-header info-color white-text text-center py-4">
+                            <strong>Create Account here</strong>
+                        </h5>
+
+                        <!--Card content-->
+                        <div class="card-body px-lg-5">
+
+                            <!-- Form -->
+                            <form class="text-center" style="color: #757575;" action="#!">
+                          
+                                <p>{{form.errors}}</p>
+
+                                <!-- Name -->
+                                <div class="md-form mt-3">
+                                   Name &nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.Name}} <br><br>
+                                </div>
+                                 <div class="md-form mt-3">
+                                   Mobile No&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.Mobile_no}}<br> 
+                                   <br><br>
+                                </div>    
+                                 <div class="md-form mt-3">
+                                   Branch&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.Branch}}<br> 
+                                   <br><br>
+                                </div>                                                       
+                                 <div class="md-form mt-3">
+                                   SEX&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.Sex}}<br> 
+                                   <br><br>
+                                </div> 
+                                 <div class="md-form mt-3">
+                                   Address&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.Address}}<br> 
+                                   <br><br>
+                                </div>                                 
+                                <!-- Sign in button -->
+                             <div class="form-group">
+                                   <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Save Details</button>
+                            <!-- Form -->
+                        </div>
+
+                    </div>
+                    <!-- Material form subscription -->
+
+             </fieldset>  
+        </form>
+      </div>     
+  </div>  
+{% endblock content %}

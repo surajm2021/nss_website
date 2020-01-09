@@ -1,0 +1,546 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="{% static 'web_pages/style_home.css' %}">
+  <link rel="stylesheet" href="{% static 'web_pages/slick.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <title>NSS-skncoe</title>
+  <link rel="shortcut icon" href="{% static 'web_pages/nss_logo.jpg' %}">
+  <style type="text/css">
+    .teacher_info{
+              background-color:  lightskyblue; 
+              margin-left: 20%;margin-right: 20%;
+    }
+    #po_name_info{
+        padding: 10%;
+      }
+      #member_pics{
+        height: 350px;
+        width: 280px;
+      }
+      .single-blog .single-blog__img {
+            width: 50%;
+            font-size: 0; }
+
+
+      @media screen and (max-width: 800px){
+      #nav_bar_element{
+        font-size: 12px;
+      }
+      .universal-h2{
+        font-size: 29px;
+      }
+       #po_name_info{
+        padding: 1%;
+      } 
+      .blog_info{
+          width: 100%;
+          height: 100px;
+          font-size: 10px;
+      }
+     .teacher_info{
+      background-color:  lightskyblue; 
+      margin-left: 10%;margin-right: 10%;
+    }
+      #member_pics{
+        height: 350px;
+        width: 230px;
+      }
+      #welcome_msg{
+        font-size: 20px;
+      }
+      .single-blog__img img{
+        width: 95%;
+        height: 230px;
+     }
+       
+ }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-navigation">
+    <div class="site-navigation-inner site-container">
+      <img src="{% static 'web_pages/site-logo.jpg' %}" alt="site logo" class="rounded-circle" style="width: 11%;"> 
+      <h1 class="text-success" id="welcome_msg">WELCOME TO NSS SKNCOE</h1> 
+      <div class="main-navigation" >
+        <ul class="main-navigation__ul" >
+           <a class="nav-item nav-link" href="{% url 'home' %}" id="nav_bar_element">Home</a>   
+           <a class="nav-item nav-link" href="{% url 'show-all-activity' %} " id="nav_bar_element">All Activity</a>
+           {% if request.user.is_staff %} 
+           <a class="nav-item nav-link" href="{% url 'new-activity' %}" id="nav_bar_element">Create New Activity</a>
+           {% endif %}
+           <a class="nav-item  nav-link" href="{% url 'nss-team' %}" id="nav_bar_element">NSS Team</a> 
+           <a class="nav-item  nav-link" href="{% url 'special-camp' %}" id="nav_bar_element">Camp</a>
+          {% if request.user.is_authenticated %}           
+          <a class="nav-item nav-link" href="https://photos.google.com/share/AF1QipOdlUvorjdTR7-bQaXST1tthaMR0uNkkQXx8pR2RO-BAnREIxVxkU0JqR4aeGaUgQ?key=Y0tma05XT0twNXBrM2daOUVOdl9WWWtleUFGV1Rn">Photos</a>          
+          <a class="nav-item nav-link" href="{% url 'logout' %}" id="nav_bar_element">Logout</a> 
+          {% else %} 
+          <a class="nav-item nav-link" href="{% url 'login' %}" id="nav_bar_element">Login</a>  
+          <div class="dropdown">
+           <button type="button" class="btn dropdown-toggle border-0 " data-toggle="dropdown">
+                    Register As
+              </button>
+                    <div class="dropdown-menu"> 
+                      <a class="dropdown-item text-success" data-toggle="modal" data-target="#myModal" href="#" id="nav_bar_element">Teacher</a>
+                      <a class="dropdown-item text-success"  href="{% url 'user-senior-register' %}" id="nav_bar_element">Student Register</a>    
+                   </div>
+          </div>  
+          {% endif %}        
+          <a class="nav-item  nav-link" href="{% url 'about' %}" id="nav_bar_element">About</a>  
+          {% if request.user.is_superuser %}
+          <a class="nav-item  nav-link" href="{% url 'active-user' %}" id="nav_bar_element">All User</a> 
+          {% endif %}
+        </ul>
+      </div>
+      <div id="myBtn" class="burger-container" onclick="myFunction(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <script>
+        function myFunction(x) {
+          x.classList.toggle("change");
+        }
+      </script>
+
+    </div>
+  </nav>
+  <!-- Navigation end -->
+  <div class="my_form">   
+         {% if messages  %}
+          {% for message in messages %}
+                  <div class="alert alert-{{message.tags}}">
+                  {{message}}
+                  </div>
+          {% endfor %}
+      {% endif %}
+  </div>
+  <!-- Top banner -->
+  <section class="fh5co-top-banner">
+    <div class="top-banner__inner site-container">
+      <div class="top-banner_image">
+        <img src="{% static 'web_pages/top-banner-author.jpg' %}" alt="author image" class="author_img">
+      </div>
+      <div class="top-banner__text">
+        <div class="top-banner__text-up">
+          <!-- <span class="brand-span">welcome....</span> -->
+          <h4 class="top-banner__h2">NATIONAL SERVICE SCHEME</h4>
+        </div>
+        <div class="top-banner__text-down">
+          <!-- <span class="brand-span">smt. kashibai navale college of engineering</span> -->
+        </div>
+        <p>NSS SKNCOE is founded by <b>Shubham Faujdar</b> and <b>Sanket Bhandari</b><br> of  Smt. Kashibai Navale College of Engineering,Pune. Our mission is to <br> encourage youth to be aware and participate in social Activities <br> which indeed will help the society grow better, smarter and faster.</p>
+      </div>
+    </div>
+  </section>
+  <div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">You have no permission</h4>
+        </div>
+        <div class="modal-body">
+          <p>Please contact NSS Head to register as teacher</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>  
+  <!-- Top banner end -->
+
+  <!-- About me -->
+  <section class="fh5co-about-me">
+    <div class="about-me-inner site-container">
+      <article class="portfolio-wrapper">
+        <div class="portfolio__img">
+          <img src="{% static 'web_pages/about-me.jpg' %}" class="about-me__profile" alt="about me profile picture">
+        </div>
+        <div class="portfolio__bottom">
+          <div class="portfolio__name">
+            <span>N</span>
+            <h2 class="universal-h2">ational  Service Scheme</h2>
+          </div>
+          <p>ब्रीदवाक्य : सेवा परमो धर्म</p>
+          <p>Motto :  Not me but you </p>
+          <p>Country :  India</p>
+          <p>Launched : 24 September 1969</p>
+        </div>
+      </article>
+      <div class="about-me__text">
+        <div class="about-me-slider">
+          <div class="about-me-single-slide">
+            <h2 class="universal-h2 universal-h2-bckg">History of NSS</h2>
+            <p><span>A</span>fter independence the University Grants Commission, headed by S. Radhakrishnan, recommended the introduction of voluntary national service in academic institutions. This idea was again considered by the Central Advisory Board of Education (CABE) at its meeting in January, 1950; after examining the idea and the experiences of other countries in this field, the board recommended that students and teachers should devote time to voluntary manual work. In the draft first Five-Year Plan adopted by the government in 1952, the need for social and labour service by Indian students for one year was stressed. In 1958 Jawaharlal Nehru, in a letter to the chief ministers, considered the idea of social service as a prerequisite for graduation. He directed the Ministry of Education to formulate a suitable scheme for the introduction of national service into academic institutions.
+            </p>
+            
+            
+          </div>
+          <div class="about-me-single-slide">
+            <h2 class="universal-h2 universal-h2-bckg">Launch of NSS</h2>
+            <p><span>I</span>n May 1969, a conf student representatives (of universities and institutions of higher education) convened by the Ministry of Education and the University Grants Commission also unanimously agreed that a national-service scheme could be an instrument for national integration. The details were soon worked out and orientation camp was organized at Rajghat.This camp was concluded on 7 June 1969.KKGupta from DU was declared first volunteer. The Planning Commission sanctioned an outlay of ₹5 crores for the NSS during the Fourth Five-Year Plan, stipulating that the NSS be a pilot project in selected institutions and universities. On 24 September 1969, the then Union Education Minister V.K.R.V. Rao launched the NSS at 37 universities in all states. The scheme has been extended to all states and universities in the country, and also +2 level institutes in many states.</p>
+           
+          </div>
+          <div class="about-me-single-slide">
+            <h2 class="universal-h2 universal-h2-bckg">Symbol of NSS</h2>
+            <p><span>T</span>he symbol for the NSS has been based on the giant Rath Wheel of the world-famous Konark Sun Temple (The Black Pagoda) situated in Odisha, India. The wheel portrays the cycle of creation, preservation and release. It signifies the movement in life across time and space, the symbol thus stands for continuity as well as change and implies the continuous striving of NSS for social change. The eight bars in the wheel represents 24 hours of a day. The red colour indicates that the volunteer is full of young blood that is lively, active, energetic and full of high spirit. The navy blue colour indicates the cosmos of which the NSS is tiny part, ready to contribute its share for the welfare of the mankind. It stands for continuity as well as change and implies the continuous striving of NSS</p>
+            
+          </div>  
+          <div class="about-me-single-slide">
+            <h2 class="universal-h2 universal-h2-bckg">Organization</h2>
+            <p><span>A</span>t national level, Ministry of Youth Affairs and Sports of India is the nodal authority, which works with state-level NSS cells. State-level NSS cells are responsibility of the respective state governments. Within states, each university has University level NSS cell under which institutions (schools and colleges) based NSS units operate. Most government and government-aided institutions have volunteer NSS units. Institutions are encouraged to have NSS volunteers. A unit typically comprises 20–40 students. They are managed internally by a responsible party from the school or college, who reports to the regional NSS coordinator. Most institutions do not have a separate uniform for NSS volunteers as there is standard khakhi colored national dress for NCC.</p>
+           
+          </div>  
+          <div class="about-me-single-slide">
+            <h2 class="universal-h2 universal-h2-bckg" align="left">NSS Manual</h2>
+            <p><span>1</span>.Orientation of students in national problems. <br>
+              2.Study of philosophy of NSS. <br>
+              3.Basic concepts and components of NSS. <br>
+              4.National service scheme ( NSS) volunteers. <br>
+              5.Special camping programme. <br>
+              6.Fundamental rights, Directive principles of state policy. <br>
+              7.Awareness programme, Consumer awareness, Highlights of consumer act. <br>
+              8.Function literacy non formal education of rural youth. <br>
+              9.Environment enrichment and conservation. <br>
+              10.Health, family welfare and nutrition. <br>
+              11.Brief of five year plans.</p>
+           
+          </div>                              
+        </div>
+      </div>
+    </div>
+    <div class="about-me-bckg"></div>
+  </section>
+  <!-- About me end -->
+  <!-- Counter -->
+  <div class="fh5co-counter counters">
+    <div class="counter-inner site-container">
+      <div class="single-count">
+        <span class="count" data-count="100">0</span>
+        <div class="single-count__text">
+          <img src="{% static 'web_pages/counter-1.png' %}" alt="counter icon">
+          <p>Our Activities</p>
+        </div>
+      </div>
+      <div class="single-count">
+        <span class="count" data-count="100">0</span>
+        <div class="single-count__text">
+          <img src="{% static 'web_pages/counter-2.png' %}" alt="counter icon">
+          <p>NSS Member</p>
+        </div>
+      </div>
+      <div class="single-count">
+        <span class="count" data-count="5">0</span>
+        <div class="single-count__text">
+          <img src="{% static 'web_pages/counter-3.png' %}" alt="counter icon">
+          <p>Total Camp</p>
+        </div>
+      </div>    
+      <div class="single-count">
+        <span class="count" data-count="15">0</span>
+        <div class="single-count__text">
+          <img src="{% static 'web_pages/counter-4.png' %}" alt="counter icon">
+          <p>Awards</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Counter -->
+<div class="teacher_info">
+  <br><h2 class="universal-h2 universal-h2-bckg">Program Officer</h2><br>
+<div  align="center" class="w3-container">
+    <div class="w3-large"></div>
+  <div class="w3-row w3-border">
+   <div class="w3-half w3-container" style="padding: 4%;"> 
+  <img src="{% static 'web_pages/pingat_sir.jpeg' %}" class="rounded-circle" width="270px" >
+  <br>
+             Prof. Sanjaykumar P. Pingat <br>
+             skncoe_vadgaon <br>
+             pune</h4>
+</div>
+<div class="w3-half w3-container" style="padding-top: 10%">
+         <img src="{% static 'web_pages/quotes.svg' %}" alt="quotes svg"> <br> <br>
+          National Service Scheme (NSS) teach us to grow ourself to Help mankind. 
+          NSS is not only a service unit. It is platform to develop our skills and we will learn how to speak with different people. 
+              We get to know the people closely by working with them and identifying needs of society and environment. 
+          Active and dedicated NSS Volunteers plays major role in society reforms.
+ </div></div></div><br></div> <hr>
+ <br>
+  <!-- Blog -->
+  <section class="fh5co-blog">
+    <div class="site-container">
+      <h2 class="universal-h2 universal-h2-bckg">Working Committy</h2>
+      <div class="blog-slider blog-inner">
+
+        <div class="single-blog">
+          <div class="single-blog__img">
+            <div class="blog_info">
+                 <h3>Attendance Head</h3>
+                 <h4>chetan Bhamare</h4>
+            </div>
+           <a href="{% static 'web_pages/chetan.jpg' %}"><img src="{% static 'web_pages/chetan.jpg' %}" alt="blog image" width="250px" height="350px;"></a>
+            
+          </div>
+          <div class="single-blog__img">
+            <div class="blog_info">
+                 <h4>Permission & Report Head</h4>
+                 <h4>Shivam Mondhe</h4>
+            </div>            
+            <a href="{% static 'web_pages/shivam_m.jpeg' %}"><img src="{% static 'web_pages/shivam_m.jpeg' %}" alt="blog image" width="250px" height="350px;"></a>
+          </div>
+        </div>
+        <div class="single-blog">
+          <div class="single-blog__img">
+            <div class="blog_info">
+                 <h3>Discipline Head</h3>
+                 <h4>Prashant Kasbe</h4>
+            </div>            
+            <a href="{% static 'web_pages/prashantkasbe.jpeg' %}"><img src="{% static 'web_pages/prashantkasbe.jpeg' %}" alt="blog image" width="250px" height="350px;"></a>
+          </div>
+          <div class="single-blog__img">
+            <div class="blog_info">
+                 <h3>Discipline Head</h3>
+                 <h4>Divyani Jain</h4>
+            </div>             
+           <a href="{% static 'web_pages/divyanijain.jpeg' %}"><img src="{% static 'web_pages/divyanijain.jpeg' %}" alt="blog image" width="250px" height="350px;"></a> 
+          </div>
+        </div>
+        <div class="single-blog">
+          <div class="single-blog__img">
+            <div class="blog_info">
+                 <h4>Permission & Report Head</h4>
+                 <h4>Meenal Baberwal</h4>
+            </div>            
+            <a href="{% static 'web_pages/meenal_m.jpeg'%}"><img src="{% static 'web_pages/meenal_m.jpeg'%}" alt="blog image" width="250px" height="350px;"></a>    
+          </div>
+          <div class="single-blog__img">
+            <div class="blog_info">
+                 <h3>Finance Head</h3>
+                  <h4>Suraj Kudale</h4>
+            </div>             
+           <a href="{% static 'web_pages/suraj_k.jpeg' %}"><img src="{% static 'web_pages/suraj_k.jpeg' %}" alt="blog image" width="250px" height="350px;"></a>
+          </div>
+        </div>        
+        <div class="single-blog">
+          <div class="single-blog__img">
+            <div class="blog_info">
+                 <h3>Discipline Head</h3>
+                 <h4>Satish Avhad</h4>
+            </div>            
+            <a href="{% static 'web_pages/satish_a.jpeg' %}"><img src="{% static 'web_pages/satish_a.jpeg' %}" alt="blog image" width="250px" height="350px;"></a>   
+            
+          </div>
+          <div class="single-blog__img">
+            <div class="blog_info">
+                 <h4>Goods Handling Head</h4>
+                 <h4>Vikas Khade</h4>
+            </div>
+            <a href="{% static 'web_pages/vikas_khadke.jpeg' %}"> <img src="{% static 'web_pages/vikas_khadke.jpeg' %}" alt="blog image" width="250px" height="350px;"contextmenu=""> </a>            
+          </div>
+        </div>
+        <div class="single-blog">
+          <div class="single-blog__img">
+            <div class="blog_info">
+                 <h3>photography Head</h3>
+                 <h4>Mahesh Nivangune</h4>
+            </div>            
+           <a href="{% static 'web_pages/mahesh.jpeg'%}"> <img src="{% static 'web_pages/mahesh.jpeg'%}" alt="blog image" width="250px" height="350px;"></a>    
+          </div>
+          <div class="single-blog__img">
+            <div class="blog_info">
+                
+            </div>             
+           
+          </div>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Blog end -->  <!-- Quotes -->
+  <section class="fh5co-quotes">
+    <div class="site-container">
+      <div class="about-me-slider">
+        <div>
+          <h2 class="universal-h2 universal-h2-bckg"></h2>
+          <p>“National Service Scheme (NSS) teach us to grow ourself to Help mankind. 
+          NSS is not only a service unit. It is platform to develop our skills and we will learn how to speak with different people. 
+              We get to know the people closely by working with them and identifying needs of society and environment. 
+          Active and dedicated NSS Volunteers plays major role in society reforms 
+          ”</p>
+          <img src="{% static 'web_pages/quotes.svg' %}" alt="quotes svg">
+          <h4>Prof. Sanjaykumar P. Pingat</h4>
+          <p>Program Officer</p>
+          <h2 class="universal-h2 universal-h2-bckg"></h2>
+        </div>
+        <div>
+          <h2 class="universal-h2 universal-h2-bckg"></h2>
+          <p>“Congrats Team! Your true effort and hardwork in DBMS mini project are to be sure very valued for NSS team. You ought to be pleased with yourselves. Congrats to all group members. Keep doing awesome.”</p>
+          <img src="{% static 'web_pages/quotes.svg' %}" alt="quotes svg">
+          <h4>Kahate Sir</h4>
+          <p>DMBS Teacher</p>
+          <h2 class="universal-h2 universal-h2-bckg"></h2>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Quotes end -->
+
+  <!-- Social -->
+  <section class="fh5co-social">
+    <div class="site-container">
+      <div class="social">
+        <h5>Follow us!!</h5>
+        <div class="social-icons">
+          <a href="#" target="_blank"><img src="{% static 'web_pages/social-twitter.png' %}" alt="social icon"></a>
+          <a href="#" target="_blank"><img src="{% static 'web_pages/social-pinterest.png'%}" alt="social icon"></a>
+          <a href="#" target="_blank"><img src="{% static 'web_pages/social-youtube.png' %}" alt="social icon"></a>
+          <a href="#" target="_blank"><img src="{% static 'web_pages/social-twitter.png' %}" alt="social icon"></a>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  <!-- Social -->
+  <table><tr>
+<div class="footer">
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark">
+
+  <div style="background-color: #6351ce;">
+    <div class="container">
+      <!-- Grid row-->
+      <div class="row py-4 d-flex align-items-center">
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-7 text-center text-md-right">
+
+          <!-- Facebook -->
+          <a class="fb-ic">
+            <i class="fab fa-facebook-f white-text mr-4"> </i>
+          </a>
+          <!-- Twitter -->
+          <a class="tw-ic">
+            <i class="fab fa-twitter white-text mr-4"> </i>
+          </a>
+          <!-- Google +-->
+          <a class="gplus-ic">
+            <i class="fab fa-google-plus-g white-text mr-4"> </i>
+          </a>
+          <!--Linkedin -->
+          <a class="li-ic">
+            <i class="fab fa-linkedin-in white-text mr-4"> </i>
+          </a>
+          <!--Instagram-->
+          <a class="ins-ic">
+            <i class="fab fa-instagram white-text"> </i>
+          </a>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+
+    </div>
+  </div>
+ <!-- Footer Links -->
+  <div class="container text-center text-md-left mt-5">
+
+    <!-- Grid row -->
+    <div class="row mt-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold">College name</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <a href="http://www.sinhgad.edu/sinhgad-engineering-institutes/">Sinhgad Institutes's</a> <br>
+        SMT. KASHIBAI NAVALE COLLEGE OF ENGINEERING <br>
+        SURVEY NO. 44/1, OFF SINHGAD ROAD, <br>
+        VADGAON BK. PUNE, MAHARASHTRA, 411041 <br>
+      </div>
+      <!-- Grid column -->
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links -->
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <a href="{% url 'profile' %}">Your Account</a>
+        </p>
+        <p>
+          <a href="http://cms.sinhgad.edu/sinhgad_engineering_institutes/skncoe_vadgaon/institute_details.aspx">SKNCOE</a>
+        </p>
+        <p>
+          <a href="https://nss.gov.in/">OFFICIAL NSS</a>
+        </p>
+        <p>
+          <a href="http://www.unipune.ac.in/other_academic_and_service_units/national_service_scheme/default.htm">SPPU NSS</a>
+        </p>
+        <p>
+          <a href="mailto:surajm2021@gmail.com">Help</a> 
+        </p>
+
+      </div>  
+      <!-- Grid column -->
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+   
+      
+        <p>
+          <i class="fas fa-envelope mr-3"></i>nssskncoe@gmail.com</p>
+        <p>
+          <i class="fas fa-phone mr-3"></i> 020 - 24354938</p>
+        <p>
+          <i class="fas fa-print mr-3"></i> 020 - 24100295</p>
+
+      </div>
+
+      <!-- Grid column -->
+    </div>
+  </div>  
+    <!-- Grid row -->
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    Suraj Shinare & Sanket Auti, All Rights Reserved
+  <!-- Copyright -->
+
+</tr>
+</table>
+</footer>
+<!-- Footer -->
+
+  <!-- Scripts -->
+  <script src="{% static 'web_pages/jquery.min.js' %}"></script>
+  <script src="{% static 'web_pages/slick.min.js' %}"></script>
+  <script src="{% static 'web_pages/main.js' %}"></script>
+</body>
+</html>

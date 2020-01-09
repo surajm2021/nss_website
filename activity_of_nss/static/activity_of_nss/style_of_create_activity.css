@@ -1,0 +1,23 @@
+@media screen and (max-width: 800px){
+.create_activity{
+        margin: 100px 0px;
+        text-align: center;
+        background: url(bg_acivity_image3.jpg) ;
+        background-size: 100%;
+        background-attachment: fixed ;        
+        background-color: blue;
+        font-size: 15px;
+}
+}
+
+.home_page{
+  display: none;
+}
+.create_activity{
+        width: 100%;
+        background: url(bg_ativity_image3.jpg);  
+        background-size: 100%;
+        background-attachment: fixed;        
+        text-align: center;
+        background-color: red;
+}

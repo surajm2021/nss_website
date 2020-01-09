@@ -1,0 +1,160 @@
+{% extends "web_pages/base.html" %}
+{% load static %}
+{% block content %}
+  <head>
+    <title>Team 2017-19</title>
+    <style type="text/css">
+      #image-gallery .modal-footer{
+        display: block;
+      }
+
+      .thumb{
+        margin-top: 25px;
+        margin-bottom: 25px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font: 18px Arial, sans-serif;  
+        height: 450px;
+        width: 280px;
+      }
+      body{
+        background-color: lightblue;
+        color: white;
+        font-weight: bold;
+      }
+      @media screen and (max-width: 800px){
+        .member_info{
+          width: 200px;
+          position: absolute;
+          top: 50px;
+          left: 285px;
+          font-size: 20px;
+
+        }
+        .thumb{
+        margin-top: 25px;
+        margin-bottom: 25px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        font: 18px Arial, sans-serif;  
+        height: 350px;
+        width: 500px;
+      }
+    .text {
+            display: none
+      }
+      }
+  .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+}
+
+.thumbnail:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+</style>
+  </head><br><h4>
+    <a href="{% url 'nss-team-2016-17' %}">Team 2016-17</a><br>                
+    <a href="{% url 'nss-team-2017-18' %}">Team 2017-19</a><br>
+    <a href="{% url 'nss-team' %}">Team 2018-20</a><br>
+    {% if request.user.is_staff %}     
+    <a href="{% url 'post-create' %}"> Add New Member</a>
+    {% endif %}</h4>
+    <br><br>
+    <h1 style="background-color: red;" align="center">BATCH 2017-18</h1>
+    <h2 style="font-size: 40px; color: black ;"><u>Commity Student :</u></h2>
+    <div class="container">
+    <div class="row">  
+    <div class="row">
+   {% for member in posts %}
+     {% if member.batch.batch == '2017-19' %}
+      {% if member.status.status != 'Volunteers' %}
+           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <h4>{{member.status}}</h4>
+                <a class="thumbnail" href="{% url 'post-detail' member.id%}">
+                    <img class="img-thumbnail"
+                         src="{{ member.image.url }}"
+                         alt="Another alt text">
+                           <div class="overlay">
+                                  <div class="text">
+                                  <div class="member_info">
+                                    <br>
+                                   name : {{member.name}}<br>
+                                   Branch : {{member.branch}}<br>
+                                   Status : {{member.status}}<br>
+                                   achivement : {{member.achievement}}<br>
+                                   sex : {{member.sex}}
+                                </div>
+                                </div>
+                            </div>
+                </a><div class="member_info"><br>
+           name : {{member.name}}<br>
+           Branch : {{member.branch}}<br>
+           Status : {{member.status}}<br>
+           achivement : {{member.achievement}}<br>
+           sex : {{member.sex}}
+        </div></div> 
+       {% endif %}  
+       {% endif %}   
+    {% endfor %}
+  </div></div>
+    <h2 style="font-size: 40px; color: black ;"><u>Volunteers</u></h2>
+    <div class="container">
+    <div class="row">  
+    <div class="row">
+   {% for member in posts %}
+     {% if member.batch.batch == '2017-19' %}
+      {% if member.status.status == 'Volunteers' %}
+           <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail" href="{% url 'post-detail' member.id%}">
+                    <img class="img-thumbnail"
+                         src="{{ member.image.url }}"
+                         alt="Another alt text">
+                           <div class="overlay">
+                                  <div class="text">
+                                  <div class="member_info">
+                                    <br>
+                                   name : {{member.name}}<br>
+                                   Branch : {{member.branch}}<br>
+                                   Status : {{member.status}}<br>
+                                   achivement : {{member.achievement}}<br>
+                                   sex : {{member.sex}}
+                                </div>
+                                </div>
+                            </div>
+                </a><div class="member_info"><br>
+           name : {{member.name}}<br>
+           Branch : {{member.branch}}<br>
+           Status : {{member.status}}<br>
+           achivement : {{member.achievement}}<br>
+           sex : {{member.sex}}
+        </div></div> 
+       {% endif %}  
+       {% endif %}   
+    {% endfor %}
+  </div></div>
+</div>
+
+{% endblock content %}

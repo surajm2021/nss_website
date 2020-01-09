@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+		{% if title  %}
+		<title>NSS SKNCOE - {{title}}</title>
+	    {% else %}	
+	      <title>NSS SKNCOE</title>
+   {% endif %}
+   <link rel="shortcut icon" href="{% static 'web_pages/nss_logo.jpg' %}">
+	 <meta charset="utf-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <style type="text/css">
+      .footer{
+            color: blue;
+            font-size: 20px;
+            font-style: bold;
+            background-color: lightyellow;
+          } 
+       @media screen and (max-width: 800px){
+       	.my_navigation_bar{
+       		position: fixed;
+       		z-index: 2;.max-width:
+          width: 100%;
+       	}
+        .block_div{
+          padding-top: 100px;
+        }
+        #nav_college_name{
+          font-size: 10px;
+        }
+        #nav_nss_logo{
+          width: 70px;
+        }
+       }
+    </style>
+</head>
+<body>
+<table>
+	<tr>	
+<div class="my_navigation_bar">
+ <nav class="navbar navbar-expand-md navbar-dark bg-dark">  
+        <a href="{% static 'web_pages/logo3.jpg' %}" class="navbar-brand">
+            <img  src="{% static 'web_pages/site-logo.jpg' %}"  width="100px" alt="Nss_skncoe" class="rounded-circle" id="nav_nss_logo">
+            
+        </a>
+       <p class="text-success font-weight-bold" id="nav_college_name">
+        NATIONAL SERVICE SCHEME <br>
+        Smt. kashibai Navale College Of <br>
+        Engineering</p>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse font-weight-bold" id="navbarCollapse">
+           <div class="navbar-nav ml-auto">
+           <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>   
+           <a class="nav-item nav-link" href="{% url 'show-all-activity' %}">All Activity</a>
+           {% if request.user.is_staff %} 
+           <a class="nav-item nav-link" href="{% url 'new-activity' %}">Create New Activity</a>
+           {% endif %}
+           <a class="nav-item  nav-link" href="{% url 'nss-team' %}">NSS Team</a> 
+           <a class="nav-item  nav-link" href="{% url 'special-camp' %}">Camp</a>
+          {% if request.user.is_authenticated %}           
+          <a class="nav-item nav-link" href="https://photos.google.com/share/AF1QipOdlUvorjdTR7-bQaXST1tthaMR0uNkkQXx8pR2RO-BAnREIxVxkU0JqR4aeGaUgQ?key=Y0tma05XT0twNXBrM2daOUVOdl9WWWtleUFGV1Rn">Photos</a> 
+		      <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a> 
+          {% else %} 
+          <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>  
+          <div class="dropdown">
+           <button type="button" class="btn dropdown-toggle border-0" data-toggle="dropdown">
+                    Register As
+              </button>
+                    <div class="dropdown-menu "> 
+                      <a class="dropdown-item" data-toggle="modal" data-target="#myModal" href="#">Teacher</a>
+                      <a class="dropdown-item"  href="{% url 'user-senior-register' %}">Student Register</a> 
+                   </div>
+          </div>  
+          {% endif %}        
+          <a class="nav-item  nav-link" href="{% url 'about' %}">About</a>  
+          {% if request.user.is_superuser %}
+          <a class="nav-item  nav-link" href="{% url 'active-user' %}">All User</a> 
+          {% endif %}
+          {% if request.user.is_authenticated %} 
+          <a class="nav-item  nav-link" href="{% url 'profile' %}"><img src="{{ user.profile.image.url }}" style="width: 40px; height: 40px; " class="rounded-circle"></a>
+          {% endif %}        
+		</div>
+    </div>
+    </nav>
+   </div></tr>
+   <div class="container">
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">You have no permission</h4>
+        </div>
+        <div class="modal-body">
+          <p>Please contact NSS Head to register as teacher</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+	<div class="my_form">   
+	       {% if messages  %}
+			    {% for message in messages %}
+			            <div class="alert alert-{{message.tags}}">
+			          	{{message}}
+	             		</div>
+		     	{% endfor %}
+			{% endif %}
+     </div>
+   <tr>
+    <div class="block_div">
+     	    {% block content %}
+	       	{% endblock content %}
+     </div>     
+  </tr>
+	<tr>
+<div class="footer">
+<!-- Footer -->
+<footer class="page-footer font-small unique-color-dark">
+
+  <div style="background-color: #6351ce;">
+    <div class="container">
+      <!-- Grid row-->
+      <div class="row py-4 d-flex align-items-center">
+
+        <!-- Grid column -->
+        <div class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0">
+          <h6 class="mb-0">Get connected with us on social networks!</h6>
+        </div>
+        <!-- Grid column -->
+
+      </div>
+      <!-- Grid row-->
+
+    </div>
+  </div>
+ <!-- Footer Links -->
+  <div class="container text-center text-md-left mt-5">
+
+    <!-- Grid row -->
+    <div class="row mt-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+
+        <!-- Content -->
+        <h6 class="text-uppercase font-weight-bold">College name</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <a href="http://www.sinhgad.edu/sinhgad-engineering-institutes/">Sinhgad Institutes's</a> <br>
+        SMT. KASHIBAI NAVALE COLLEGE OF ENGINEERING <br>
+        SURVEY NO. 44/1, OFF SINHGAD ROAD, <br>
+        VADGAON.
+      </div>
+      <!-- Grid column -->
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+        <!-- Links -->
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+        <p>
+          <a href="{% url 'profile' %}">Your Account</a>
+        </p>
+        <p>
+          <a href="http://cms.sinhgad.edu/sinhgad_engineering_institutes/skncoe_vadgaon/institute_details.aspx">SKNCOE</a>
+        </p>
+        <p>
+          <a href="https://nss.gov.in/">OFFICIAL NSS</a>
+        </p>
+        <p>
+          <a href="http://www.unipune.ac.in/other_academic_and_service_units/national_service_scheme/default.htm">SPPU NSS</a>
+        </p>
+        <p>
+          <a href="mailto:surajm2021@gmail.com">Help</a> 
+        </p>
+
+      </div>  
+      <!-- Grid column -->
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+        <!-- Links -->
+        <h6 class="text-uppercase font-weight-bold">Contact</h6>
+        <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+   
+      
+        <p>
+          <i class="fas fa-envelope mr-3"></i>nssskncoe@gmail.com</p>
+        <p>
+          <i class="fas fa-phone mr-3"></i> 020 - 24354938</p>
+        <p>
+          <i class="fas fa-print mr-3"></i> 020 - 24100295</p>
+
+      </div>
+
+      <!-- Grid column -->
+    </div>
+  </div>  
+    <!-- Grid row -->
+    <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    Suraj Shinare & Sanket Auti, All Rights Reserved
+  <!-- Copyright -->
+</div>
+</tr>
+</table>
+</footer>
+<!-- Footer -->
+</div>
+</body>
+</html>

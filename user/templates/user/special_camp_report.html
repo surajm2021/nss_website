@@ -1,0 +1,87 @@
+{% extends "web_pages/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+  <title>Camps</title>
+	<style type="text/css">
+    body{
+             background-image: linear-gradient(red,yellow, orange, blue);
+    }
+		.camp_details{
+			margin: 7%;
+			margin-top: 2%;
+		}
+		.pdf_show{
+			
+		}
+		@media screen and (max-width: 800px){
+		.camp_details{
+			margin: 7%;
+     
+		}	
+    #report_desc{
+      font-size: 15px;
+    }
+		}
+	</style>
+</head>
+<div class="camp_details">
+<p>
+<h1 class="font-weight-bold"><u>Special Camp</u></h1>
+<center><h4 style="color: blue;" class="font-weight-bold">2018-19</h4></center><hr>
+<h5>Adopted village : sayyad pimpari <br>
+    Date : 23/12/2012 to 29 /12/2012 <br>
+<br>
+1) spcial camp history writing of the village, biodiversity,save girls child awareness programme rally, women empowerment, self help group empowerment, economic and social schemes for development, aids and woman’s health awareness. Soil and water testing, disaster management, conservation energy, effects of bad habits, save forest and environment, youth and personality development, topic various eminent person’s lecture organized in camp duration.<br>
+2) 25000 tree planted by village and nss. <br>
+3) Hb and blood group check up camp organisede – 400 girls checked. <br>
+4) Blood donation camp organized. – 40 blood bag collected. <br>
+5) cleaning village and  surrounding areas of schools and temples. <br>
+6) economic and social survey of village. <br>
+7) Cct work 3500 running meter. <br>
+8) organized rally and street play in village. <br>
+</h5><hr>
+</p>
+<center><h4 style="color: red;" class="font-weight-bold">2017-18</h4></center><hr>
+<h5>Adopted village : sayyad pimpari <br>
+    Date : 23/12/2012 to 29 /12/2012 <br>
+<br>
+1) spcial camp history writing of the village, biodiversity,save girls child awareness programme rally, women empowerment, self help group empowerment, economic and social schemes for development, aids and woman’s health awareness. Soil and water testing, disaster management, conservation energy, effects of bad habits, save forest and environment, youth and personality development, topic various eminent person’s lecture organized in camp duration.<br>
+2) 25000 tree planted by village and nss. <br>
+3) Hb and blood group check up camp organisede – 400 girls checked. <br>
+4) Blood donation camp organized. – 40 blood bag collected. <br>
+5) cleaning village and  surrounding areas of schools and temples. <br>
+6) economic and social survey of village. <br>
+7) Cct work 3500 running meter. <br>
+8) organized rally and street play in village. <br>
+</h5><hr>
+<center><h4 style="color: red;" class="font-weight-bold">2016-17</h4></center><hr>
+<h5>Adopted village : sayyad pimpari <br>
+    Date : 23/12/2012 to 29 /12/2012 <br>
+<br>
+1) spcial camp history writing of the village, biodiversity,save girls child awareness programme rally, women empowerment, self help group empowerment, economic and social schemes for development, aids and woman’s health awareness. Soil and water testing, disaster management, conservation energy, effects of bad habits, save forest and environment, youth and personality development, topic various eminent person’s lecture organized in camp duration.<br>
+2) 25000 tree planted by village and nss. <br>
+3) Hb and blood group check up camp organisede – 400 girls checked. <br>
+4) Blood donation camp organized. – 40 blood bag collected. <br>
+5) cleaning village and  surrounding areas of schools and temples. <br>
+6) economic and social survey of village. <br>
+7) Cct work 3500 running meter. <br>
+8) organized rally and street play in village. <br>
+</h5><hr></div>
+{% if request.user.is_authenticated %} 
+<div class="pdf_show" align="center">
+   <h2>ACTIVITY REPORT</h2> <br>
+   {% if request.user.is_staff %}           
+   <h3 align="right"><a href="{% url 'simple' %}">Add Report &nbsp;&nbsp;&nbsp;</a></h3>
+   {% endif %}	
+   {% for report in reports %}
+   <a href="{{report.document.url}}"><h3 class="font-weight-bold" id="report_desc">{{ report.description }}</h3></a>
+   {% if request.user.is_staff %} 
+      <small>report added by :{{report.added_by}}</small>
+               <a href="{% url 'report-detail' report.id%}">details</a>
+    {% endif %}            
+    <br>
+   {% endfor %}
+{% endif %}   
+</div>   
+{% endblock content %}

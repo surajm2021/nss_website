@@ -1,0 +1,18 @@
+{% extends "web_pages/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+	<title>
+		Document Details
+	</title>
+</head>
+<div style="background-image: url('{% static 'user/backgroud_for_details_page.jpg' %}'); ">
+<br>
+added_by = {{object.added_by}}<br>
+              <div align="center" style="color: white; font-size: 20px;" class="font-weight-bold">  
+              Name of report : {{object.description}}<br>
+              {% if object.added_by == user %}
+               <a class="btn btn-danger btn-sm mt-1" href="{% url 'report-delete' object.id %}">delete</a>
+              {% endif %}              
+            </div>
+{% endblock content %}

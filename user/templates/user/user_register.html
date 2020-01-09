@@ -1,0 +1,66 @@
+{% extends "web_pages/base.html"%}
+{% load static %}
+{% block content %}   
+<head>
+  <title>Register</title>
+</head> 
+    	<form method="POST">       
+         <div class="embed-responsive order-md-4" align="center" style="background-image: url('{% static 'user/backgroud_for_register_page.jpg' %}') ">   
+    		{% csrf_token %}
+             <fieldset class="form-group">
+                 <!-- Material form subscription -->
+                    <div class="card" align="center" style="background-color:lightblue; width: 500px; text-align: left; font-size: 19px;" >
+
+                        <h5 class="card-header info-color white-text text-center py-4">
+                            <strong>Create Your Account</strong>
+                        </h5>
+
+                        <!--Card content-->
+                        <div class="card-body px-lg-5">
+
+                            <!-- Form -->
+                            <form class="text-center" style="color: #757575;" action="#!">
+                          
+                                <p>{{form.errors}}</p>
+
+                                <!-- Name -->
+                                <div class="md-form mt-3">
+                                   username &nbsp;: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.username}} <br><br>
+                                </div>
+                                <div class="md-form mt-3">
+                                   First Name &nbsp;: &nbsp;{{form.first_name}}<br><br>
+                                </div>
+                                 <div class="md-form mt-3">
+                                   Last Name &nbsp;: &nbsp;{{form.last_name}} <br><br>
+                                </div>                                 
+                                <div class="md-form mt-3">
+                                   Email &nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  {{form.email}} <br><br>
+                                </div>
+                                <div class="md-form mt-3">
+                                   Password &nbsp;: &nbsp;&nbsp; {{form.password1}} <br><br>
+                                </div>
+                                 <div class="md-form mt-3">
+                                   Conform&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.password2}}<br> 
+                                    password
+                                   <br><br>
+                                </div>                          
+
+                                <!-- Sign in button -->
+                             <div class="form-group">
+                                   <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Request for create account</button>
+                            <!-- Form -->
+                                     <div class="border-top pt-3">
+                            <small class="text-muted">
+                                  already have an Account? <a class="col-sm-12" href="{% url 'login' %}">sign in</a>
+                            </small>
+                               </div>
+                        </div>
+
+                    </div>
+                    <!-- Material form subscription -->
+
+             </fieldset>  
+    	</form>
+      </div>     
+  </div>  
+{% endblock content %}

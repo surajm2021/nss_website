@@ -1,0 +1,48 @@
+{% extends "web_pages/base.html"%}
+{% load static %}
+{% block content %}  
+<head>
+   <link rel="stylesheet" type="text/css" href="{% static 'user/main.css' %}">
+   <title>Register</title>
+</head>
+    <div class="page-wrapper bg-gra-01 p-t-20 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Registration Info NSS</h2>
+                    <form method="POST">
+                      {% csrf_token %}
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="Username" name="username">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="First Name" name="first_name">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="text" placeholder="Last Name" name="last_name">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="email" placeholder="Email" name="email">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="password" placeholder="Password" name="password1">
+                        </div>
+                        <div class="input-group">
+                            <input class="input--style-3" type="password" placeholder="conform Password" name="password2">
+                        </div>                        
+                        <div class="p-t-10">
+                            <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                        </div>
+                      <div class="border-top pt-3">
+                         <small class="text-muted">
+                                  already have an Account? <a class="col-sm-12" href="{% url 'login' %}">sign in</a>
+                        </small>
+                     </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>  
+ 
+{% endblock content %}

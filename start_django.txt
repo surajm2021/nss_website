@@ -1,0 +1,397 @@
+to create new project in django
+
+1> $ django-admin startproject django_project
+
+2>it create
+
+django_project/  manage.py*  start_django.txt
+
+
+To create new app
+1> go to your project file where your manager.py file 
+2> then create bog 
+        python manager.py startapp blog
+3> your app is create
+    in seeting write 
+    'users.apps.MyUserConfig',
+
+
+
+4>then open the view and imfort Hthpresponse from django.http
+
+5> write function home with return Hthpresponse
+
+6>create urls.py new file in blog
+
+7> in urls.py file write 
+from django.urls import render
+from . import views
+
+urlpatterns =[
+    path('',views.Home,name='blog-home'),
+]
+
+
+8> then go to the django_project open  urls.py of django_project
+    import include 
+    and add path in urlpatterns
+    path('blog/', include(blog.urls)),
+
+
+
+
+
+TO ADD CSS AND IMAGE FILE....
+
+1>> create ststic insode the app
+2> In static create folder simalar name to the app name
+3>add css and image here
+4>
+
+
+To create superuser:
+
+1> run coomand pythom manage.py makemigrations
+2> python manage.py migrate
+3>now run:
+         python manage.py createsuperuser
+         add new password and login id
+         for git bash add winpty    
+
+
+
+
+
+
+
+
+
+
+
+
+
+to add HTML file in Django
+1>
+   blog ---> template -----> blog ----->home.html,about.html    
+
+
+2>in setting add install 
+
+INSTALLED_APPS = [
+    'blog.apps.BlogConfig',
+     .
+     .
+     .
+     ]
+
+3>in views:
+
+def Home(request):
+    return render(request,'blog/home.html')     
+
+
+
+
+
+
+
+
+
+To pass data from view to html page
+1> create dict inside the list
+post=[
+{},
+{}
+]
+
+2> in function create dict with pass values eg
+
+    context={
+      'posts':posts
+    }
+    return render(request,'blog/home.html',context)
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+TO CREATE DATABASE
+1> create class in models.py in app blog
+eg.    
+
+from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
+# Create your models here.
+
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    content= models.TextField()
+    date_posted= models.DateTimeField(default=timezone.now)
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
+
+
+then run command python manage.py makemigration 
+its create migrate file 001_initial.py file    
+
+
+2> to see sql code 
+command:
+        python manage.py sqlmigrate blog 0001
+
+
+we also create post using python command
+
+
+ ADD POST CLASS IN ADMIN PAGE 
+ GO TO THE ADMIN.PY 
+ IMPORT POST FROM .MODELS
+ AND THEN REGIDTER IN ADMIN page
+ admin.site.register(Post)
+
+        
+
+
+
+
+
+
+TO CREATE LOGIN PAGE :
+1>FIRST CREATE APP BY COMAND PYTHON MANAGE.PY STARTAPP USER
+
+2>
+   create usrl patter to register page
+
+3>
+   in view page :
+    import UserCreationFrom from Django.contrib.auth
+
+
+    form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    then in template create form using html and {{form}}  to print userCreationForm form          
+
+
+
+
+
+
+
+
+
+@##############################  SOME IMP CLASS BASE VIEWS IN DJANGO..........
+
+there are many predefine class base views like 
+list views for listing all post
+details views for details 
+update delete create veiws also for there respective functionality........
+
+
+
+
+
+1>use list views .................\
+
+step 1: from django.views.generic import ListView
+step 2: create class and inherit from ListView
+       e.g :
+           class PostListView:
+                post=model
+
+step 3:
+        in url.py call list view as
+        path('',PostListView.as_view(),name='blog-home')                
+BY defauld it look at  <app>/<model>_<viwstype>.html
+
+step 4:
+so in views.py in PostListView write 
+    template_name = 'blog/home.html'
+    conteext_object_name='posts'
+    
+step 5:
+     to ordaring post by date add in class PostListView
+     ordering = ['-date_posted']    
+
+OUR LIST VIEWS CREATED
+
+
+
+
+
+2> Details views 
+step 1: 
+       craete class inhetance with DeatilsView
+       and in class same as PostListView       
+
+step 2:
+        main url is imp for the point out specific post 
+
+        post('post/<int:pk>/',PostDeatilsView.as_veiw) 
+        
+        here  pk: primary key
+              int : only integer need
+              as_views : to handle class as views
+
+step 3:
+        craete template similar to home .html
+        only differnce to show only one post
+        change modelname #post to object
+
+step 4:
+        ADD LINK OF DETAILS VIEWS IN HOME>HTML
+        href={% url 'post-details' post.id %}
+
+
+
+
+
+3> createView 
+
+step 1:
+       create class 
+       with  feilds = ['title','content']
+
+step 2:
+        in url pattern same as PostListView 
+        By Defauld it look template at post_form.html
+        so template create post_form.html same as register.html
+
+step 3:
+       to set post.author.id 
+       in class postCraeteView
+
+       def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+step 4:
+       to set redirect url model 
+       in model.py in blog app
+
+       def getAbsoluteurl(self):
+            return reverse('post-detail',kwarg={'pk'=self.pk})
+
+        Now It Working............
+
+
+
+
+4> ADD LOGIN Authority 
+   in view from django.contrib.auth.mixin import LoginRequiredMixing
+   add in createPostClass(LoginRequiredMixing,createView)
+
+
+
+5> Update views:
+  
+  step 1:
+        create class as postdetails views
+
+  step 2:
+        url('post/<int:pk>/update',PostupdateViews.as_views)
+
+        Now it workinggg
+
+ step 3:
+       to add login check
+       we need add UserPassesTestMixing in Upadateviews
+       
+       also add 
+
+       def test_func(self):
+            post = self.get_object()
+            if self.request.user == post.author:
+                return True
+            return False
+            
+
+
+6> DeleteViws
+ 
+    step 1: 
+           in viws.py
+           similar to details viws
+
+    step 2:
+           in urls.py
+           similar to updateviews
+
+           By Defauld it redirect to post_confire_delete.html 
+
+    step 3:
+           create post_confire_delete.html similar to post_form.html
+
+           also set success_url='/'
+
+
+
+##################### PAGINATION IN GAJANGO #################
+  step 1: 
+         first in class PostList add
+         paginate_by= 2
+
+         it work but.....
+
+  step 2:
+         in home.html below the for loop write
+
+         {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+     AND ITS DONE...............
+
+
+
+
+
+
+
+
+ 
+ ################# TO RESET  THE PASSWORD AND EMAIL SEND #########
+
+step 1: 
+      first create  a  url for reset password as
+      
+
+
+
+
+
+
+
+
+                        
+
+
+  
+       

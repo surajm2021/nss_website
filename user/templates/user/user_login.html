@@ -1,0 +1,25 @@
+{% extends "web_pages/base.html"%}
+{% load static %}
+{% block content %}
+<head>
+    <title>Login</title>
+</head>
+<form method="POST">
+    <div align="center" class="embed-responsive order-md-4" >  
+    		{% csrf_token %}
+        <br><br><br>
+         <div class="imgcontainer">
+            <img src="{% static 'user/avatar.png' %}" alt="Avatar" class="rounded-circle">
+         </div><br>
+                <h1 class="text-info">Login</h1><br>             
+                     <small>{{form.errors}}</small>
+                      username :  {{form.username}}<br><br>
+                      password :  {{form.password}}<br><br>
+                <button class="btn"  type="submit">Sign in</button><br><br>
+                 <small>   
+                         need an Account ? <a class="col-sm-12" href="{% url 'user-junior-register' %}">sing up</a>
+                 </small>
+            </div>
+         </div>     
+ </form>      
+{% endblock content%}

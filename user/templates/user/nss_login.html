@@ -1,0 +1,24 @@
+{% extends "web_pages/base.html"%}
+{% load static %}
+{% block content %} 
+<head>
+    <title>Login</title>
+</head> 
+<form method="POST">
+    <div align="center" class="embed-responsive order-md-4" >  
+    		{% csrf_token %}
+        <br><br><br>
+         <div class="imgcontainer">
+            <img src="{% static 'user/avatar.png' %}" alt="Avatar" class="rounded-circle">
+         </div><br>
+                <h1 class="text-info">Login</h1><br>             
+                    		
+                Username : <input type="text" name="username" placeholder="username"><br><br>
+				Password : <input type="password" name="password" placeholder="password"><br><br>
+				<input type="submit"><br><br>
+                         need an Account ? <a class="col-sm-12" href="{% url 'user-senior-register' %}">sing up</a>
+                 </small>
+            </div>
+         </div>     
+ </form> 
+{% endblock content%}

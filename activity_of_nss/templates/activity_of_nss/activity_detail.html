@@ -1,0 +1,28 @@
+{% extends "web_pages/base.html" %}
+{% block content %}
+<head>
+  <title>Activity Details</title>
+</head>
+<br><br>
+  <div style="margin-left: 10%; margin-right: 10%;">
+    <div align="center" class="embed-responsive order-md-4" >  
+      <img class="article-img" src="{{ object.image.url }} " height="500px" width="500px">
+    </div>     
+      <h3>Posted By....</h3>
+       <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ object.created_by.profile.image.url }} " height="100px" width="100px" style="margin: 20px;">
+          <div class="media-body">
+            <div class="article-metadata">
+              <h4>{{object.created_by.username}}</h4> 
+              <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+              {% if object.created_by == user %}
+               <a class="btn btn-secondary btn-sm mt-1" href="{% url 'activity-update' object.id %}">update</a>
+               <a class="btn btn-danger btn-sm mt-1" href="{% url 'activity-delete' object.id %}">delete</a>
+             {% endif %}
+            </div>
+            <h2 class="article-title">{{ object.title }}</h2>
+            <p class="article-content">{{ object.description }}</p>
+          </div>
+        </article> 
+     </div>   <br><br><br>
+{% endblock content %}
