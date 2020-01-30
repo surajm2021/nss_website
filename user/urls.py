@@ -7,12 +7,9 @@ from .views import(
                  PostCreateView,
                  PostUpdateView,
                  PostDeleteView,
-                 model_form_upload,
                  ReportListView,
-                 ReportCreateView,
                  ReportDetailView,
                  ReportDeleteView,
-                 showthis
                  )
 
 

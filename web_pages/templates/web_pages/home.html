@@ -1,5 +1,4 @@
 {% load static %}
-<!doctype html>
 <html lang="en">
 <head>
   <!-- Required meta tags -->
@@ -28,6 +27,7 @@
       }
       .single-blog .single-blog__img {
             width: 50%;
+
             font-size: 0; }
 
 
@@ -80,10 +80,11 @@
            <a class="nav-item nav-link" href="{% url 'new-activity' %}" id="nav_bar_element">Create New Activity</a>
            {% endif %}
            <a class="nav-item  nav-link" href="{% url 'nss-team' %}" id="nav_bar_element">NSS Team</a> 
-           <a class="nav-item  nav-link" href="{% url 'special-camp' %}" id="nav_bar_element">Camp</a>
+          <a class="nav-item  nav-link" href="{% url 'special-camp' %}" id="nav_bar_element">Camp</a>
+            <a class="nav-item nav-link" id="nav_bar_element" href="https://photos.google.com/share/AF1QipOdlUvorjdTR7-bQaXST1tthaMR0uNkkQXx8pR2RO-BAnREIxVxkU0JqR4aeGaUgQ?key=Y0tma05XT0twNXBrM2daOUVOdl9WWWtleUFGV1Rn">photos</a>
           {% if request.user.is_authenticated %}           
-          <a class="nav-item nav-link" href="https://photos.google.com/share/AF1QipOdlUvorjdTR7-bQaXST1tthaMR0uNkkQXx8pR2RO-BAnREIxVxkU0JqR4aeGaUgQ?key=Y0tma05XT0twNXBrM2daOUVOdl9WWWtleUFGV1Rn">Photos</a>          
-          <a class="nav-item nav-link" href="{% url 'logout' %}" id="nav_bar_element">Logout</a> 
+
+          <a class="nav-item nav-link" href="{% url 'logout' %}" id="nav_bar_element">Logout</a>
           {% else %} 
           <a class="nav-item nav-link" href="{% url 'login' %}" id="nav_bar_element">Login</a>  
           <div class="dropdown">
@@ -287,7 +288,6 @@
     <div class="site-container">
       <h2 class="universal-h2 universal-h2-bckg">Working Committy</h2>
       <div class="blog-slider blog-inner">
-
         <div class="single-blog">
           <div class="single-blog__img">
             <div class="blog_info">
@@ -295,7 +295,6 @@
                  <h4>chetan Bhamare</h4>
             </div>
            <a href="{% static 'web_pages/chetan.jpg' %}"><img src="{% static 'web_pages/chetan.jpg' %}" alt="blog image" width="250px" height="350px;"></a>
-            
           </div>
           <div class="single-blog__img">
             <div class="blog_info">
@@ -525,14 +524,14 @@
     </div>
   </div>  
     <!-- Grid row -->
-  </div>
+</footer></div>
   <!-- Footer Links -->
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2019 Copyright:
     Suraj Shinare & Sanket Auti, All Rights Reserved
   <!-- Copyright -->
-
+  </div>
 </tr>
 </table>
 </footer>

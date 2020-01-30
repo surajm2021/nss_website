@@ -97,7 +97,7 @@
     <h1 style="background-color: red;" align="center">BATCH 2018-20</h1>
     <h2  id="student_status"><u>Commity Student :</u></h2>
     <div class="container">
-    <div class="row">  
+    <div class="row">
     <div class="row">
    {% for member in posts %}
      {% if member.batch.batch == '2018-20' %}
@@ -126,14 +126,14 @@
            Status : {{member.status}}<br>
            achivement : {{member.achievement}}<br>
            sex : {{member.sex}}
-        </div></div> 
-       {% endif %}  
-       {% endif %}   
+        </div></div>
+       {% endif %}
+       {% endif %}
     {% endfor %}
   </div></div>
     <h2  id="student_status"><u>Volunteers</u></h2>
     <div class="container">
-    <div class="row">  
+    <div class="row">
     <div class="row">
     {% for member in posts %}
       {% if member.batch.batch == '2018-20' %}
@@ -161,10 +161,10 @@
            Status : {{member.status}}<br>
            achivement : {{member.achievement}}<br>
            sex : {{member.sex}}
-        </div></div> 
-       {% endif %}  
-       {% endif %}   
+        </div></div>
+       {% endif %}
+       {% endif %}
     {% endfor %}
   </div></div>
-</div>
+</div></div>
 {% endblock content %}

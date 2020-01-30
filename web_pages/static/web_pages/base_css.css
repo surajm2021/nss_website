@@ -1,0 +1,18 @@
+      .footer{
+            color: blue;
+            font-size: 20px;
+            font-style: bold;
+            background-color: lightyellow;
+          }
+       @media screen and (max-width: 800px){
+
+        .block_div{
+          padding-top: 100px;
+        }
+        #nav_college_name{
+          font-size: 9px;
+        }
+        #nav_nss_logo{
+          width: 70px;
+        }
+       }
