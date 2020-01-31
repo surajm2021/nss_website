@@ -1,51 +1,89 @@
-{% extends "web_pages/base.html"%}
-{% block content %}
- <head>
-  <title>Active User</title>
- 	<style type="text/css">
+<!doctype html>
+
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+     	<style type="text/css">
  		@media screen and (max-width: 800px){
  		.footer{
  			display: none;
  		}
- 		}
+}
+/* Set a style for all buttons */
+#button{
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 1500px;
+
+}
+
+#button:hover {
+  opacity: 0.8;
+}
  	</style>
- </head>
+</head>
+<body>
 <br>
-<h3 align="center"><u>All Register Student</u></h3><br>
+<h1><u>Admin Dashboard</u></h1>
 <div>
 <table border="2px;" style="width:1500px" class="table table-hover">
   <tr align="center">
   	<thead>
+    <th>Uid</th>
   	<th>Username</th>
   	<th>Email</th>
-  	<th>First Name</th>
-  	<th>Last Name</th>
   	<th>Last Login Date</th>
   	<th>Date Of Joined</th>
     <th>Staff member</th>
-    <th>Active</th>
+    <th>is verify</th>
+
+
     </thead>
   </tr>
+    <form method='POST'>
+     {% csrf_token %}
 {% for member in allusers %}
-  <tr>
-  	<td>{{member.username}}</td>
+  <tr  align="center">
+    <td>{{member.id}}</td>
+  	<td onclick="document.getElementById('id01').style.display='block'">{{member.username}}</td>
+      <input type="hidden" name="member_id" value="{{member.id}}">
+<!--      <button onclick="document.getElementById('id01').style.display='block'" value="{{member.id}}">{{member.username}}</button>-->
   	<td>{{member.email}}</td>
-  	<td>{{member.first_name}}</td>
-  	<td>{{member.last_name}}</td>
-  	<td>{{member.last_login.date}}</td>
+    <td>{{member.last_login.date}}</td>
   	<td>{{member.date_joined.date}}</td>
   	<td>
-  	{% if member.is_staff %}
-      &#10004;
+        {% if member.is_staff %}
+        <input type="checkbox" name="current_staff" value="{{member.id}}" checked><br>
+        <input type="hidden" name="all_staff" value="{{member.id}}"><br>
+    {% else %}
+        <input type="checkbox" name="make_staff" value="{{member.id}}"><br>
   	{% endif %}
   	</td>
   	<td>
   	{% if member.is_active %}
-      &#10004;
+        <input type="checkbox" name="current_active" value="{{member.id}}" checked><br>
+        <input type="hidden" name="all_active" value="{{member.id}}"><br>
+    {% else %}
+        <input type="checkbox" name="make_active" value="{{member.id}}"><br>
   	{% endif %}
   	</td>
+
+
   </tr>
-{% endfor %} 
-</table>     
+
+{% endfor %}
+            <button type="submit" id="button" name="btnform2">Save Changes</button>
+    </form>
+</table>
 </div>
-{% endblock content%}
+</body>
+</html>

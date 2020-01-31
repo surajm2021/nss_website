@@ -27,10 +27,12 @@
       }
       .single-blog .single-blog__img {
             width: 50%;
-
+            height :400px;
             font-size: 0; }
 
-
+       .single-blog{
+      height:400px;
+     }
       @media screen and (max-width: 800px){
       #nav_bar_element{
         font-size: 12px;
@@ -61,6 +63,10 @@
         width: 95%;
         height: 230px;
      }
+     .single-blog{
+      height:350px;
+     }
+
        
  }
   </style>
@@ -97,7 +103,7 @@
                    </div>
           </div>  
           {% endif %}        
-          <a class="nav-item  nav-link" href="{% url 'about' %}" id="nav_bar_element">About</a>  
+<!--          <a class="nav-item  nav-link" href="{% url 'about' %}" id="nav_bar_element">About</a>  -->
           {% if request.user.is_superuser %}
           <a class="nav-item  nav-link" href="{% url 'active-user' %}" id="nav_bar_element">All User</a> 
           {% endif %}
@@ -269,7 +275,7 @@
     <div class="w3-large"></div>
   <div class="w3-row w3-border">
    <div class="w3-half w3-container" style="padding: 4%;"> 
-  <img src="{% static 'web_pages/pingat_sir.jpeg' %}" class="rounded-circle" width="270px" >
+  <img src="{% static 'web_pages/pingat_sir.jpeg' %}" class="rounded-circle" width="60%" >
   <br>
              Prof. Sanjaykumar P. Pingat <br>
              skncoe_vadgaon <br>
@@ -288,86 +294,24 @@
     <div class="site-container">
       <h2 class="universal-h2 universal-h2-bckg">Working Committy</h2>
       <div class="blog-slider blog-inner">
-        <div class="single-blog">
+        {% for member1,member2 in community_member %}
+     <div class="single-blog">
           <div class="single-blog__img">
             <div class="blog_info">
-                 <h3>Attendance Head</h3>
-                 <h4>chetan Bhamare</h4>
+                 <h4 style="color:blue">{{member1.status}}</h4>
+                 <h5>{{member1.name}}</h5>
             </div>
-           <a href="{% static 'web_pages/chetan.jpg' %}"><img src="{% static 'web_pages/chetan.jpg' %}" alt="blog image" width="250px" height="350px;"></a>
+           <a href="{{ member1.image.url }}"><img src="{{ member1.image.url }}" alt="blog image" width="250px" height="350px;"></a>
           </div>
           <div class="single-blog__img">
             <div class="blog_info">
-                 <h4>Permission & Report Head</h4>
-                 <h4>Shivam Mondhe</h4>
-            </div>            
-            <a href="{% static 'web_pages/shivam_m.jpeg' %}"><img src="{% static 'web_pages/shivam_m.jpeg' %}" alt="blog image" width="250px" height="350px;"></a>
-          </div>
-        </div>
-        <div class="single-blog">
-          <div class="single-blog__img">
-            <div class="blog_info">
-                 <h3>Discipline Head</h3>
-                 <h4>Prashant Kasbe</h4>
-            </div>            
-            <a href="{% static 'web_pages/prashantkasbe.jpeg' %}"><img src="{% static 'web_pages/prashantkasbe.jpeg' %}" alt="blog image" width="250px" height="350px;"></a>
-          </div>
-          <div class="single-blog__img">
-            <div class="blog_info">
-                 <h3>Discipline Head</h3>
-                 <h4>Divyani Jain</h4>
-            </div>             
-           <a href="{% static 'web_pages/divyanijain.jpeg' %}"><img src="{% static 'web_pages/divyanijain.jpeg' %}" alt="blog image" width="250px" height="350px;"></a> 
-          </div>
-        </div>
-        <div class="single-blog">
-          <div class="single-blog__img">
-            <div class="blog_info">
-                 <h4>Permission & Report Head</h4>
-                 <h4>Meenal Baberwal</h4>
-            </div>            
-            <a href="{% static 'web_pages/meenal_m.jpeg'%}"><img src="{% static 'web_pages/meenal_m.jpeg'%}" alt="blog image" width="250px" height="350px;"></a>    
-          </div>
-          <div class="single-blog__img">
-            <div class="blog_info">
-                 <h3>Finance Head</h3>
-                  <h4>Suraj Kudale</h4>
-            </div>             
-           <a href="{% static 'web_pages/suraj_k.jpeg' %}"><img src="{% static 'web_pages/suraj_k.jpeg' %}" alt="blog image" width="250px" height="350px;"></a>
-          </div>
-        </div>        
-        <div class="single-blog">
-          <div class="single-blog__img">
-            <div class="blog_info">
-                 <h3>Discipline Head</h3>
-                 <h4>Satish Avhad</h4>
-            </div>            
-            <a href="{% static 'web_pages/satish_a.jpeg' %}"><img src="{% static 'web_pages/satish_a.jpeg' %}" alt="blog image" width="250px" height="350px;"></a>   
-            
-          </div>
-          <div class="single-blog__img">
-            <div class="blog_info">
-                 <h4>Goods Handling Head</h4>
-                 <h4>Vikas Khade</h4>
+                 <h4 style="color:blue">{{member2.status}}</h4>
+                 <h5>{{member2.name}}</h5>
             </div>
-            <a href="{% static 'web_pages/vikas_khadke.jpeg' %}"> <img src="{% static 'web_pages/vikas_khadke.jpeg' %}" alt="blog image" width="250px" height="350px;"contextmenu=""> </a>            
+           <a href="{{ member2.image.url }}"><img src="{{ member2.image.url }}" alt="blog image" width="250px" height="350px;"></a>
           </div>
         </div>
-        <div class="single-blog">
-          <div class="single-blog__img">
-            <div class="blog_info">
-                 <h3>photography Head</h3>
-                 <h4>Mahesh Nivangune</h4>
-            </div>            
-           <a href="{% static 'web_pages/mahesh.jpeg'%}"> <img src="{% static 'web_pages/mahesh.jpeg'%}" alt="blog image" width="250px" height="350px;"></a>    
-          </div>
-          <div class="single-blog__img">
-            <div class="blog_info">
-                
-            </div>             
-           
-          </div>
-        </div>
+      {% endfor %}
           </div>
         </div>
       </div>

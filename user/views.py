@@ -235,7 +235,35 @@ from django.contrib.auth import get_user_model
 
 @staff_member_required
 def showthis(request):
+    if request.method == "POST":
+        current_active = request.POST.getlist('current_active')
+        all_active = request.POST.getlist('all_active')
+        make_dis_active = set(current_active) ^ set(all_active)
+        print(make_dis_active)
+        for user_id in make_dis_active:
+            user = User.objects.get(id=user_id)
+            user.is_active = False
+            user.save()
+        id_active = request.POST.getlist('make_active')
+        print(id_active)
+        for user_id in id_active:
+            user = User.objects.get(id=user_id)
+            user.is_active = True
+            user.save()
+        current_staff = request.POST.getlist('current_staff')
+        all_staff = request.POST.getlist('all_staff')
+        make_dis_staff = set(current_staff) ^ set(all_staff)
+        print(make_dis_staff)
+        for user_id in make_dis_staff:
+            user = User.objects.get(id=user_id)
+            user.is_staff = False
+            user.save()
+        id_staff = request.POST.getlist('make_staff')
+        print(id_staff)
+        for user_id in id_staff:
+            user = User.objects.get(id=user_id)
+            user.is_staff = True
+            user.save()
     all_users = get_user_model().objects.all()
-
     context = {'allusers': all_users}
     return render(request, 'user/active_user_show.html', context)

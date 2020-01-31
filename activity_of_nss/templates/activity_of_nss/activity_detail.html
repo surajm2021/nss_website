@@ -2,27 +2,56 @@
 {% block content %}
 <head>
   <title>Activity Details</title>
+    <style>
+        .main_block{
+                    style="margin-left: 10%;
+                    margin-right: 10%;"
+        }
+        .article-img{
+            height:300px;
+            width: 300px;
+        }
+        #author_img{
+            height:100px;
+            width: 100px;
+            margin:20px;
+        }
+        #description{
+        padding: 25px;
+        }
+    </style>
 </head>
 <br><br>
-  <div style="margin-left: 10%; margin-right: 10%;">
+  <div class="main_block">
     <div align="center" class="embed-responsive order-md-4" >  
-      <img class="article-img" src="{{ object.image.url }} " height="500px" width="500px">
+      <img class="article-img" src="{{ object.image.url }} " > <br><br>
     </div>     
       <h3>Posted By....</h3>
+
        <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ object.created_by.profile.image.url }} " height="100px" width="100px" style="margin: 20px;">
-          <div class="media-body">
-            <div class="article-metadata">
-              <h4>{{object.created_by.username}}</h4> 
-              <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
-              {% if object.created_by == user %}
-               <a class="btn btn-secondary btn-sm mt-1" href="{% url 'activity-update' object.id %}">update</a>
-               <a class="btn btn-danger btn-sm mt-1" href="{% url 'activity-delete' object.id %}">delete</a>
-             {% endif %}
-            </div>
-            <h2 class="article-title">{{ object.title }}</h2>
-            <p class="article-content">{{ object.description }}</p>
+
+                <tr>
+                    <td >
+                        <img class="rounded-circle article-img"  src="{{ object.created_by.profile.image.url }}" id="author_img" >
+                    </td><td>
+                          <div class="media-body">
+                            <div class="article-metadata">
+                              <h4>{{object.created_by.username}}</h4>
+                              <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
+                              {% if object.created_by == user %}
+                               <a class="btn btn-secondary btn-sm mt-1" href="{% url 'activity-update' object.id %}">update</a>
+                               <a class="btn btn-danger btn-sm mt-1" href="{% url 'activity-delete' object.id %}">delete</a>
+                             {% endif %}
+                            </div>
+                     </div>
+                </td>
+                </tr></article>
+           </table>
+      <div id="description">
+            <h2 class="article-title">{{ object.title }} </h2><br>
+            <p class="article-content" >{{ object.description }}</p>
+        </div>
           </div>
-        </article> 
+
      </div>   <br><br><br>
 {% endblock content %}

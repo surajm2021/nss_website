@@ -83,8 +83,12 @@
     <a href="{% url 'post-create' %}"> Add New Member</a>
     {% endif %}</h4>
     <br><br>
-    <h1 style="background-color: red;" align="center">BATCH 2017-18</h1>
+       {% if posts.batch.batch == '2017-19' %}
+    <h1 style="background-color: red;" align="center">BATCH 2016-17</h1>
     <h2 style="font-size: 40px; color: black ;"><u>Commity Student :</u></h2>
+    {% else %}
+    <p>no member add yet</p>
+    {% endif %}
     <div class="container">
     <div class="row">  
     <div class="row">
@@ -120,7 +124,12 @@
        {% endif %}   
     {% endfor %}
   </div></div>
+    {% if posts.status.status == 'Volunteers' %}
     <h2 style="font-size: 40px; color: black ;"><u>Volunteers</u></h2>
+    {% else %}
+    <p>no Volunteers add yet</p>
+    {% endif %}
+
     <div class="container">
     <div class="row">  
     <div class="row">
