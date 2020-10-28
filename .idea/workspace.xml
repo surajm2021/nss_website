@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8c201f61-db1c-4528-963c-a25ef6782585" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/final_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/final_project/settings.py" afterDir="false" />
-    </list>
+    <list default="true" id="8c201f61-db1c-4528-963c-a25ef6782585" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,6 +180,14 @@
       <option name="presentableId" value="Default" />
       <updated>1579844765348</updated>
     </task>
+    <task id="LOCAL-00001" summary="setting.py file delete">
+      <created>1603898526347</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603898526347</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -209,12 +214,12 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32956153" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32956153" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.4963343" visible="true" weight="0.32673267" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.4963343" weight="0.32673267" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5036657" side_tool="true" weight="0.32771823" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32956153" />
       <window_info anchor="bottom" id="SOQL Query" order="11" />
       <window_info anchor="bottom" id="Log Analyzer" order="12" />
-      <window_info anchor="bottom" id="Anonymous Apex" order="13" />
+      <window_info active="true" anchor="bottom" id="Anonymous Apex" order="13" visible="true" weight="0.32956153" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -241,6 +246,10 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="setting.py file delete" />
+    <option name="LAST_COMMIT_MESSAGE" value="setting.py file delete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
